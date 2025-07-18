@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Message Board</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #dbeafe, #f0f4ff);
+      color: #333;
+      padding: 30px;
+    }
+
+    .board-container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"],
+    textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3b82f6;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .messages {
+      margin-top: 30px;
+    }
+
+    .message-card {
+      background-color: #f8fafc;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 15px;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .message-card .name {
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 5px;
+    }
+
+    .message-card .text {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="board-container">
+    <h1>💬 Community Message Board</h1>
+    <form id="messageForm">
+      <input type="text" id="name" placeholder="Your name" required />
+      <textarea id="message" rows="4" placeholder="Type your message..." required></textarea>
+      <button type="submit">Post Message</button>
+    </form>
+
+    <div class="messages" id="messageBoard"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("messageForm");
+    const messageBoard = document.getElementById("messageBoard");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (name && message) {
+        const messageCard = document.createElement("div");
+        messageCard.className = "message-card";
+
+        const nameEl = document.createElement("div");
+        nameEl.className = "name";
+        nameEl.textContent = name;
+
+        const textEl = document.createElement("div");
+        textEl.className = "text";
+        textEl.textContent = message;
+
+        messageCard.appendChild(nameEl);
+        messageCard.appendChild(textEl);
+        messageBoard.prepend(messageCard);
+
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
